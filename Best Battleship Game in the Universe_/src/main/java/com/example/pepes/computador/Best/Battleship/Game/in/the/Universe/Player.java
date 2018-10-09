@@ -2,10 +2,9 @@ package com.example.pepes.computador.Best.Battleship.Game.in.the.Universe;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity //entity is always declared at class level
 public class Player {
@@ -41,6 +40,26 @@ public class Player {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    ///GETTER FOR iD DOESNT WORK/// ID DOESNT SHOW UP IN DATABASE -----> at the moment
+
+
+
+    @OneToMany(mappedBy="player", fetch= FetchType.EAGER) //// does anything go into MappedBy ???
+            Set<GamePlayer> gamePlayerSet;          ///////////////////////// no access modifier. On purpose???
+
+    public void addGamePlayer(GamePlayer gameplayer) {  //// check this also
+        gameplayer.setPlayer(this);
+        gamePlayerSet.add(gameplayer);
+    }
+
+
+
+
 
 
 
