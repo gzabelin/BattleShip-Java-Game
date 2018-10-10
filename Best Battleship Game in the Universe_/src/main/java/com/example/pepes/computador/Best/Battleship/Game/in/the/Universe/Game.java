@@ -25,11 +25,11 @@ public class Game {
 
 
 
-    @OneToMany(mappedBy="game", fetch= FetchType.EAGER) //// does anything go into MappedBy ???-- NO.mapped by -> put there the name of the class which is the ONE in the ONE-TO-MANY relationship. i.e. the strongest part.
+    @OneToMany(mappedBy="game", fetch= FetchType.EAGER)
     private Set<GamePlayer> gamePlayerSet = new HashSet<>();
 
 
-    public void addGamePlayer(GamePlayer gameplayer) {  //// check this also
+    public void addGamePlayer(GamePlayer gameplayer) {
         gameplayer.setGame(this);
         gamePlayerSet.add(gameplayer);
     }
@@ -49,7 +49,7 @@ public class Game {
         setGameCreationDate(x);
     }
 
-/// Should i create a completely empty constructor as well?? --> no. In this case "empty" means "without parameters"
+
 
 
     public Date getGameCreationDate() {

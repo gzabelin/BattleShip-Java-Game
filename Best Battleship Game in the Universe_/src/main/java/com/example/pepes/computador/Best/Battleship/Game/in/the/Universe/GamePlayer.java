@@ -20,14 +20,14 @@ public class GamePlayer {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="player_id") //////////// is this just the name of the column?? Can this be anything? -> yes it can be anything!
-    private Player player;      /////////// do i need player1 and player 2???
+    @JoinColumn(name="player_id")
+    private Player player;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="game_id_lkjfkj")
     private Game game;
 
-    public void setGame(Game aGame){        //// check if this is sufficient + see constructor below
+    public void setGame(Game aGame){
 
         this.game = aGame;
 
@@ -44,7 +44,7 @@ public class GamePlayer {
     }
 
     public Player getPlayer(){
-        return player;          /////////// how about player 2?
+        return player;
     }
 
 
@@ -53,15 +53,17 @@ public class GamePlayer {
 
     GamePlayer(){
 
-        Date x = new Date();
-        setGameJoinDate(x);
+
     }
 
 
-    public GamePlayer(Game game, Player player) {   ////// also added in the context of JPA tables.
+    public GamePlayer(Game game, Player player) {
 
         this.game=game;
         this.player=player;
+
+        Date x = new Date();
+        setGameJoinDate(x);
 
     }
 

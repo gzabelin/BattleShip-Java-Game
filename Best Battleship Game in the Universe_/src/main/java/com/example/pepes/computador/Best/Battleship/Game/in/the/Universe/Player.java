@@ -3,10 +3,11 @@ package com.example.pepes.computador.Best.Battleship.Game.in.the.Universe;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity //entity is always declared at class level
+@Entity
 public class Player {
 
 
@@ -20,23 +21,21 @@ public class Player {
 
 
     public Player(){}
-    // empty constructor required for CLASSES marked with @Entity;
-    // IF you have another non-empty constructor
 
 
 
-    // added this one because cmdLineRunner
+
     public Player(String un){
         setUserName(un);
     }
 
 
-    // GUI- generated getter
+
     public String getUserName() {
         return userName;
     }
 
-    // GUI setter
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -49,10 +48,10 @@ public class Player {
 
 
 
-    @OneToMany(mappedBy="player", fetch= FetchType.EAGER) //// does anything go into MappedBy ???
-            Set<GamePlayer> gamePlayerSet;          ///////////////////////// no access modifier. On purpose???
+    @OneToMany(mappedBy="player", fetch= FetchType.EAGER)
+    private Set<GamePlayer> gamePlayerSet = new HashSet<>();
 
-    public void addGamePlayer(GamePlayer gameplayer) {  //// check this also
+    public void addGamePlayer(GamePlayer gameplayer) {
         gameplayer.setPlayer(this);
         gamePlayerSet.add(gameplayer);
     }
