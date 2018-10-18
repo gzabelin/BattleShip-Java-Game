@@ -17,6 +17,12 @@ public class SalvoController {
     @Autowired
     private GameRepository gameRepository;
 
+//    @Autowired
+//    private PlayerRepository playerRepository;
+//
+    @Autowired
+    private GamePlayerRepository gamePlayerRepository;
+
     @RequestMapping("/games")
     public List<Game> getAll() {
         return gameRepository.findAll();            /// findAll() is a standard method from JPA Repository Interface
@@ -56,25 +62,100 @@ public class SalvoController {
         List<Map<String, Object>> gameJSON = new LinkedList<>();
 
 
+// This code is OK, but Vasil's solution is better :)
 
-        for (int i=0; i<allGames.size(); i++){
+//        for (int i=0; i<allGames.size(); i++){
+//
+//            Map<String, Object> gameInfo = new HashMap<>();
+//
+//            gameInfo.put("id", allGames.get(i).getId());
+//            gameInfo.put("created", allGames.get(i).getGameCreationDate());
+//
+//            gameJSON.add(gameInfo);
+//        }
 
-            Map<String, Object> gameInfo = new HashMap<>();
 
-            gameInfo.put("id", allGames.get(i).getId());
-            gameInfo.put("created", allGames.get(i).getGameCreationDate());
+        // return gameJSON;
 
-            gameJSON.add(gameInfo);
-        }
+        return allGames.stream()
+                       // .sorted((game1, game2) -> game2.getId()-game1.getId())
+                        .map(game -> createGameDto(game))
+                        .collect(toList());
+
+    }
+
+    private Map<String, Object> createGameDto(Game game){
+        Map<String, Object> gameInfo = new HashMap<>();
+        gameInfo.put("id", game.getId());
+        gameInfo.put("created", game.getGameCreationDate());
+
+        return  gameInfo;
+    }
 
 
-         return gameJSON;
+    @RequestMapping("/games/gameInfo")
+    public List<Object> getAllGameInfo() {
+
+        List<Game> allGameInfo = new LinkedList<>();
+
+        allGameInfo = getAll();
+
+
+        return allGameInfo.stream()
+                    .map(game -> gameDTO(game))
+                    .collect(toList());
 
 
 
     }
 
+    private Map<String, Object> playerDTO (Player pl){
 
+        Map<String, Object> playerInfo = new HashMap<>();
+
+        playerInfo.put("id", pl.getId());
+        playerInfo.put("User Name", pl.getUserName());
+
+        return playerInfo;
+
+    }
+
+    private Map<String, Object> gamePlayerDTO (GamePlayer gp){
+
+        Map<String, Object> gamePlayerXY = new HashMap<>();
+
+        gamePlayerXY.put("GP id", gp.getId());
+        gamePlayerXY.put("player", playerDTO(gp.getPlayer()));
+
+
+        return gamePlayerXY;
+
+    }
+
+    private List<Map<String, Object>> gamePlayerList (Game game){
+        List<GamePlayer> gamePlayerList = new LinkedList<>();
+
+        gamePlayerList = gamePlayerRepository.findAll();
+
+        return gamePlayerList.stream()
+                            .filter(gamePlayer -> gamePlayer.getGame()== game)
+                            .map(gameplayer-> gamePlayerDTO(gameplayer) )
+                            .collect(toList());
+    }
+
+
+    private Map<String, Object> gameDTO (Game game){
+
+        Map<String, Object> gameDTO = new TreeMap<>();
+
+        gameDTO.put("Game ID", game.getId());
+        gameDTO.put("Game created", game.getGameCreationDate());
+        gameDTO.put("Gameplayers", gamePlayerList(game));
+
+
+
+        return gameDTO;
+    }
 
 
 

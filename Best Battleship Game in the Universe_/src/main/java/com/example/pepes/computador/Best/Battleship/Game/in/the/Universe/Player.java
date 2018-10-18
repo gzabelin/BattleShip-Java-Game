@@ -44,7 +44,6 @@ public class Player {
         return id;
     }
 
-    ///GETTER FOR iD DOESNT WORK/// ID DOESNT SHOW UP IN DATABASE -----> at the moment
 
 
 

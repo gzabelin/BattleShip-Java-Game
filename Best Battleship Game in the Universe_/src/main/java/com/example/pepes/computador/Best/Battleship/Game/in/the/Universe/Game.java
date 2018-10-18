@@ -63,4 +63,8 @@ public class Game {
     public Long getId() {
         return id;
     }
+
+    public Set<GamePlayer> getGamePlayerSet() {
+        return gamePlayerSet;
+    }
 }
