@@ -69,6 +69,17 @@ public class GamePlayer {
 
 
 
+    public void distributeScore(Score score){
+
+        this.player.addScore(score);
+        this.game.addScore(score);
+    }
+
+
+//    public Double getScore(){
+//
+//
+//    }
 
 
 

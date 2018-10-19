@@ -116,9 +116,19 @@ public class SalvoController {
         playerInfo.put("id", pl.getId());
         playerInfo.put("User Name", pl.getUserName());
 
-        return playerInfo;
+        playerInfo.put("total_score", pl.getTotalScore());
+        playerInfo.put("num_wins", pl.getNumWins());
+        playerInfo.put("num_losses", pl.getNumLosses());
+        playerInfo.put("num_ties", pl.getNumTies());
 
-    }
+
+     //   for (Score s: pl.getScoreSet()){
+     //       playerInfo.put("this_score", s.getScore()); /// this gives me just the last available score ;) HashMap overwrites all others
+     //   }/// nope this doesn't work. I added all scores to repository as a chunk, so ScoreSet contains ALL the scores from moment 1.
+
+
+        return playerInfo;
+}
 
     private Map<String, Object> gamePlayerDTO (GamePlayer gp){
 

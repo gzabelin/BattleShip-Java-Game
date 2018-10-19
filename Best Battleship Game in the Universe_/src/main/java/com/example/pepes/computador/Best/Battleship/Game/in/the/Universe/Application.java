@@ -17,7 +17,7 @@ public class Application {
 
 
 	@Bean
-	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository) {
+	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository, ScoreRepository scoreRepository) {
 		return (args) -> {
 
 
@@ -76,6 +76,33 @@ public class Application {
 			GamePlayer gp8 = new GamePlayer(game4, p1);
 			GamePlayer gp9 = new GamePlayer(game5, p4);
 			GamePlayer gp10 = new GamePlayer(game5, p2);
+
+
+
+			Score score1 = new Score (gp1, 0.0);
+			Score score2 = new Score (gp2, 1.0);
+			Score score3 = new Score (gp3, 1.0);
+			Score score4 = new Score (gp4, 0.0);
+			Score score5 = new Score (gp5, 0.5);
+			Score score6 = new Score (gp6, 0.5);
+			Score score7 = new Score (gp7, 0.5);
+			Score score8 = new Score (gp8, 0.5);
+			Score score9 = new Score (gp9, 1.0);
+			Score score10 = new Score (gp10, 0.0);
+
+
+
+
+			p1.setPassword("24");
+			p2.setPassword("42");
+			p3.setPassword("kb");
+			p4.setPassword("mole");
+			p5.setPassword("butthol");
+			p6.setPassword("kikiki");
+
+
+
+
 
 			gp1.addShip(ship1);
 			gp1.addShip(ship2);
@@ -163,6 +190,16 @@ public class Application {
 			salvoRepository.save(salvo12);
 
 
+			scoreRepository.save(score1);
+			scoreRepository.save(score2);
+			scoreRepository.save(score3);
+			scoreRepository.save(score4);
+			scoreRepository.save(score5);
+			scoreRepository.save(score6);
+			scoreRepository.save(score7);
+			scoreRepository.save(score8);
+			scoreRepository.save(score9);
+			scoreRepository.save(score10);
 
 
 

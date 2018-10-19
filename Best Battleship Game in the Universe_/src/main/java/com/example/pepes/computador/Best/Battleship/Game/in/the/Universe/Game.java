@@ -35,7 +35,13 @@ public class Game {
     }
 
 
+    @OneToMany(mappedBy="gameOfScore", fetch= FetchType.EAGER)
+    private Set<Score> scoreSet = new HashSet<>();
 
+    public void addScore(Score score) {
+        score.setGame(this);
+        scoreSet.add(score);
+    }
 
 
 
@@ -50,7 +56,7 @@ public class Game {
     }
 
 
-
+    public Set<Score> getScoreSet() {return scoreSet;}
 
     public Date getGameCreationDate() {
         return this.gameCreationDate;

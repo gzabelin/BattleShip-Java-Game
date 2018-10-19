@@ -7,18 +7,57 @@
         ol li{
             list-style-type: none;
         }
+
+        td {
+            min-width: 50px;
+            text-align: center;
+
+        }
+
+        table {
+            border-spacing: 0px !important;
+            border: solid 1px;
+        }
+
+        th, td {
+             border: solid 1px;
+             padding: 3px;
+        }
+
+        .user {
+            text-align: left;
+        }
+
+
     </style>
 </head>
-<body>
+<body style="display: flex">
 
-    <header>
+    <div style="display: inline-block">
         <h1>The Gaems that thave been created</h1>
-    </header>
 
-    <div>
-        <ol id="list">
-        </ol>
+        <div>
+            <ol id="list">
+            </ol>
 
+        </div>
+    </div>
+    <div style="display: inline-block; margin-left: 40px;">
+        <h1>Leader Board</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Total Score</th>
+                    <th>Won</th>
+                    <th>Lost</th>
+                    <th>Tied</th>
+                </tr>
+            </thead>
+            <tbody id="player_scores">
+            </tbody>
+        </table>
     </div>
 
     <script type="text/javascript" src="gamelist.js"></script>
